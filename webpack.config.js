@@ -28,7 +28,7 @@ module.exports = {
             {
                 loader: 'file-loader',
                 options: {name: 'assets/images/[name].[ext]'},
-                test: /\.(png|jpeg|gif)/
+                test: /\.(png|jpe?g|gif)/
             },
             {
                 include: /src/,

@@ -8,3 +8,8 @@ body {
     box-sizing: border-box;
     outline: none;
 }
+
+body {
+    background: url("../static/background.jpg") no-repeat;
+    background-size: cover;
+}

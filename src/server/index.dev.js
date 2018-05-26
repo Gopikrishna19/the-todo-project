@@ -7,6 +7,7 @@ config.entry.app = [
     'webpack-hot-middleware/client',
     config.entry.app
 ];
+config.module.rules[1].loaders[0] = 'style-loader';
 config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
