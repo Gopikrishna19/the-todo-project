@@ -1,0 +1,22 @@
+const express = require('express');
+
+const argv = require('../utils/argv');
+const {getAbsolutePath} = require('../utils/path');
+const {send, statuses} = require('./responses');
+const {setCORSHeaders, setJSONHeaders} = require('./headers');
+
+const PORT = 8080;
+const app = express();
+
+app.use(express.static(getAbsolutePath('public')));
+
+app.use('/api', setCORSHeaders, setJSONHeaders);
+app.use('/api/*', send(statuses.NOT_FOUND));
+
+if (argv.mode === 'development') {
+    require('./index.dev')(app);
+}
+
+app.listen(PORT, () => {
+    console.log(`Server started at ${PORT}!`); // eslint-disable-line no-console
+});
