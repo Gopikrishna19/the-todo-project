@@ -6,10 +6,12 @@ body {
 
 * {
     box-sizing: border-box;
+    font-family: inherit;
     outline: none;
 }
 
 body {
     background: url("../static/background.jpg") no-repeat;
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
 }
