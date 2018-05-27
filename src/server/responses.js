@@ -1,5 +1,6 @@
 const statuses = module.exports.statuses = {
     FORBIDDEN: 403,
+    INTERNAL_SERVER_ERROR: 500,
     NOT_FOUND: 404,
     OK: 200,
     UNAUTHORIZED: 401
@@ -7,6 +8,7 @@ const statuses = module.exports.statuses = {
 
 const messages = {
     [statuses.FORBIDDEN]: 'Forbidden',
+    [statuses.INTERNAL_SERVER_ERROR]: 'Internal Server Error',
     [statuses.NOT_FOUND]: 'Not Found',
     [statuses.OK]: 'OK',
     [statuses.UNAUTHORIZED]: 'Unauthorized'

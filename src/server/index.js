@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 
 const {connectDatabase} = require('./database');
@@ -9,9 +10,11 @@ const {setCORSHeaders, setJSONHeaders} = require('./headers');
 const PORT = 8080;
 const app = express();
 
+app.use(bodyParser.json());
 app.use(express.static(getAbsolutePath('public')));
 
 app.use('/api', setCORSHeaders, setJSONHeaders);
+app.use('/api/todos', require('./api/todos'));
 app.use('/api/*', send(statuses.NOT_FOUND));
 
 if (argv.mode === 'development') {

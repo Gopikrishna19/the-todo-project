@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "1.18.3",
     "minimist": "1.2.0",
     "mongoose": "5.1.2",
     "prop-types": "15.6.1",
