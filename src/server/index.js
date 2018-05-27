@@ -1,5 +1,6 @@
 const express = require('express');
 
+const {connectDatabase} = require('./database');
 const argv = require('../utils/argv');
 const {getAbsolutePath} = require('../utils/path');
 const {send, statuses} = require('./responses');
@@ -17,6 +18,12 @@ if (argv.mode === 'development') {
     require('./index.dev')(app);
 }
 
-app.listen(PORT, () => {
-    console.log(`Server started at ${PORT}!`); // eslint-disable-line no-console
-});
+(async () => {
+    const dbConnection = await connectDatabase();
+
+    app.listen(PORT, () => {
+        console.log(`Server started at ${PORT}!`); // eslint-disable-line no-console
+    });
+
+    process.on('exit', () => dbConnection.close());
+})();
