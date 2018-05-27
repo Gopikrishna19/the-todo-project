@@ -1,11 +1,12 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 
-const {connectDatabase} = require('./database');
+const {connectDatabase} = require('./utils/database');
 const argv = require('../utils/argv');
+const {log} = require('../utils/logger');
 const {getAbsolutePath} = require('../utils/path');
-const {send, statuses} = require('./responses');
-const {setCORSHeaders, setJSONHeaders} = require('./headers');
+const {send, statuses} = require('./utils/responses');
+const {setCORSHeaders, setJSONHeaders} = require('./utils/headers');
 
 const PORT = 8080;
 const app = express();
@@ -25,8 +26,16 @@ if (argv.mode === 'development') {
     const dbConnection = await connectDatabase();
 
     app.listen(PORT, () => {
-        console.log(`Server started at ${PORT}!`); // eslint-disable-line no-console
+        log(`Server started at ${PORT}!`); // eslint-disable-line no-console
     });
 
-    process.on('exit', () => dbConnection.close());
+    const closeConnection = trigger => (...args) => {
+        log('Triggered:', trigger, '!', 'Closing database before stopping...');
+        dbConnection.close();
+        process.exit(...args);
+    };
+
+    process.on('beforeExit', closeConnection('beforeExit'));
+    process.on('SIGINT', closeConnection('SIGINT'));
+    process.on('SIGKILL', closeConnection('SIGKILL'));
 })();

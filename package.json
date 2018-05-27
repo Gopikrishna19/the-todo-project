@@ -39,9 +39,10 @@
     "webpack-hot-middleware": "2.22.2"
   },
   "scripts": {
-    "build": "rimraf public && webpack",
+    "build": "npm run clean && webpack",
+    "clean": "rimraf public",
     "eslint": "eslint . --ignore-path .gitignore",
-    "start:dev": "nodemon --watch src/server src/server -- --mode development",
+    "start:dev": "npm run clean && nodemon --watch src/server src/server -- --mode development",
     "start": "npm run build && node src/server"
   },
   "author": "Gopikrishna Sathyamurthy",

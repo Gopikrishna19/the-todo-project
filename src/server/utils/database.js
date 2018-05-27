@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const {log} = require('../../utils/logger');
+
 const CONNECTION_URL = 'mongodb://localhost:27017';
 const DB_NAME = 'todos';
 
@@ -11,7 +13,7 @@ module.exports.connectDatabase = () => new Promise(
                 return reject(error);
             }
 
-            console.log('Connected to database!'); // eslint-disable-line no-console
+            log('Connected to database!');
 
             return resolve(connection);
         }
