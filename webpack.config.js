@@ -3,11 +3,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const {getAbsolutePath} = require('./src/utils/path');
 
-const cssLoader = {
-    loader: 'css-loader',
-    options: {minimize: true}
-};
-
 module.exports = {
     entry: {app: getAbsolutePath('src/client/index.js')},
     mode: 'production',
@@ -20,7 +15,14 @@ module.exports = {
             {
                 loaders: [
                     MiniCSSExtractPlugin.loader,
-                    cssLoader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            localIdentName: '[local][name]-[hash:base64:5]',
+                            minimize: true,
+                            modules: true
+                        }
+                    },
                     'sass-loader'
                 ],
                 test: /\.s?[ac]ss$/
