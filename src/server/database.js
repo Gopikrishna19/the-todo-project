@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const {log} = require('../../utils/logger');
+const {log} = require('../utils/logger');
 
 const CONNECTION_URL = 'mongodb://localhost:27017';
 const DB_NAME = 'todos';
